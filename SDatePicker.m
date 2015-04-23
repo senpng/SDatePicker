@@ -1,10 +1,3 @@
-//
-//  SDatePicker.m
-//  BKDateAndTimePickerView
-//
-//  Created by 沈鹏 on 14/10/24.
-//  Copyright (c) 2014年 Bhavya Kothari. All rights reserved.
-//
 
 #import "SDatePicker.h"
 #define currentMonth [currentMonthString integerValue]
