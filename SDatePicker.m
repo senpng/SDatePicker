@@ -345,6 +345,7 @@
     }
     else
     { // am/pm
+        firstTimeLoad = false;
         return 2;
         
     }
