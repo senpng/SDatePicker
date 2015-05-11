@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,10 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hox-bk-S7q">
-                    <rect key="frame" x="0.0" y="26" width="320" height="162"/>
-                </pickerView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14r-Bg-OUW">
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="14r-Bg-OUW">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <items>
@@ -36,8 +33,22 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hox-bk-S7q">
+                    <rect key="frame" x="0.0" y="51" width="320" height="162"/>
+                </pickerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="14r-Bg-OUW" secondAttribute="trailing" id="BPM-6m-Eo4"/>
+                <constraint firstItem="14r-Bg-OUW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="F4z-pm-GsX"/>
+                <constraint firstItem="Hox-bk-S7q" firstAttribute="top" secondItem="14r-Bg-OUW" secondAttribute="bottom" id="Ier-bY-z1n"/>
+                <constraint firstAttribute="trailing" secondItem="Hox-bk-S7q" secondAttribute="trailing" id="P2v-XU-QWA"/>
+                <constraint firstItem="Hox-bk-S7q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VTX-80-RPv"/>
+                <constraint firstAttribute="bottom" secondItem="Hox-bk-S7q" secondAttribute="bottom" id="aiR-9x-ocG"/>
+                <constraint firstItem="Hox-bk-S7q" firstAttribute="top" secondItem="14r-Bg-OUW" secondAttribute="bottom" id="iwo-fx-1rb"/>
+                <constraint firstItem="14r-Bg-OUW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xWr-3O-m8f"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="customPicker" destination="Hox-bk-S7q" id="y6R-Lq-yeX"/>
@@ -45,4 +56,9 @@
             </connections>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

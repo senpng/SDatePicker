@@ -301,6 +301,7 @@
                 return 30;
             }
             
+            
         }
         else
         {
@@ -345,6 +346,7 @@
     }
     else
     { // am/pm
+        firstTimeLoad = false;
         return 2;
         
     }
@@ -433,7 +435,7 @@
     [sdPicker setFrame:frame];
     
     //遮挡层
-    sdPicker->blockView = [[UIView alloc] initWithFrame:view.frame];
+    sdPicker->blockView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
     sdPicker->blockView.backgroundColor = [UIColor blackColor];
     sdPicker->blockView.alpha = 0.3f;
     UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc]initWithTarget:sdPicker action:@selector(tapBlockView)];
