@@ -430,6 +430,7 @@
     sdPicker->d = done;
     
     CGRect frame = sdPicker.frame;
+    frame.size.width = view.frame.size.width;
     frame.origin.x = 0;
     frame.origin.y = view.frame.size.height;
     [sdPicker setFrame:frame];
