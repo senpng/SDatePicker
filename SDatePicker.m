@@ -38,6 +38,9 @@
     NSInteger selectedYearRow;
     NSInteger selectedMonthRow;
     NSInteger selectedDayRow;
+    NSInteger selectedHourRow;
+    NSInteger selectedSecondRow;
+    NSInteger selectedAMPMRow;
     
     //    BOOL firstTimeLoad;
     
@@ -46,59 +49,14 @@
 -(id)init
 {
     self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SDatePicker class]) owner:self options:nil][0];
+    
+    self = [super init];
+    
     if (self) {
         firstTimeLoad = YES;
         
         self.customPicker.delegate = self;
         self.customPicker.dataSource = self;
-        
-        NSDate *date = [NSDate date];
-        
-        // Get Current Year
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"yyyy"];
-        
-        NSString *currentyearString = [NSString stringWithFormat:@"%@",
-                                       [formatter stringFromDate:date]];
-        
-        
-        // Get Current  Month
-        
-        [formatter setDateFormat:@"MM"];
-        
-        currentMonthString = [NSString stringWithFormat:@"%ld",(long)[[formatter stringFromDate:date]integerValue]];
-        
-        
-        // Get Current  Date
-        
-        [formatter setDateFormat:@"dd"];
-        NSString *currentDateString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
-        
-        
-        // Get Current  Hour
-        [formatter setDateFormat:@"hh"];
-        NSString *currentHourString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
-        NSInteger hour = [currentHourString intValue];
-        if (hour>12) {
-            hour-=12;
-        }
-        currentHourString = [NSString stringWithFormat:@"%02d",hour];
-        
-        // Get Current  Minutes
-        [formatter setDateFormat:@"mm"];
-        NSString *currentMinutesString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
-        
-        // Get Current  AM PM
-        
-        [formatter setDateFormat:@"a"];
-        NSString *currentTimeAMPMString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
-        
-        if ([currentTimeAMPMString isEqualToString:@"上午"]) {
-            currentTimeAMPMString = @"AM";
-        }else if([currentTimeAMPMString isEqualToString:@"下午"]){
-            currentTimeAMPMString = @"PM";
-        }
         
         
         // PickerView -  Years data
@@ -154,24 +112,85 @@
         }
         
         
-        // PickerView - Default Selection as per current Date
-        
-        [self.customPicker selectRow:[yearArray indexOfObject:currentyearString] inComponent:0 animated:YES];
-        
-        [self.customPicker selectRow:[monthArray indexOfObject:currentMonthString] inComponent:1 animated:YES];
-        
-        [self.customPicker selectRow:[DaysArray indexOfObject:currentDateString] inComponent:2 animated:YES];
-        
-        [self.customPicker selectRow:[hoursArray indexOfObject:currentHourString] inComponent:3 animated:YES];
-        
-        [self.customPicker selectRow:[minutesArray indexOfObject:currentMinutesString] inComponent:4 animated:YES];
-        
-        [self.customPicker selectRow:[amPmArray indexOfObject:currentTimeAMPMString] inComponent:5 animated:YES];
-        
-        
     }
     return self;
 }
+
+-(void)selectNowDate
+{
+    
+    NSDate *date = [NSDate date];
+    
+    // Get Current Year
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy"];
+    
+    NSString *currentyearString = [NSString stringWithFormat:@"%@",
+                                   [formatter stringFromDate:date]];
+    
+    
+    // Get Current  Month
+    
+    [formatter setDateFormat:@"MM"];
+    
+    currentMonthString = [NSString stringWithFormat:@"%ld",(long)[[formatter stringFromDate:date]integerValue]];
+    
+    
+    // Get Current  Date
+    
+    [formatter setDateFormat:@"dd"];
+    NSString *currentDateString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
+    
+    
+    // Get Current  Hour
+    [formatter setDateFormat:@"hh"];
+    NSString *currentHourString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
+    NSInteger hour = [currentHourString intValue];
+    if (hour>12) {
+        hour-=12;
+    }
+    currentHourString = [NSString stringWithFormat:@"%02d",hour];
+    
+    // Get Current  Minutes
+    [formatter setDateFormat:@"mm"];
+    NSString *currentMinutesString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
+    
+    // Get Current  AM PM
+    
+    [formatter setDateFormat:@"a"];
+    NSString *currentTimeAMPMString = [NSString stringWithFormat:@"%@",[formatter stringFromDate:date]];
+    
+    if ([currentTimeAMPMString isEqualToString:@"上午"]) {
+        currentTimeAMPMString = @"AM";
+    }else if([currentTimeAMPMString isEqualToString:@"下午"]){
+        currentTimeAMPMString = @"PM";
+    }
+    
+    
+    selectedYearRow = [yearArray indexOfObject:currentyearString];
+    selectedMonthRow = [monthArray indexOfObject:currentMonthString];
+    selectedDayRow = [DaysArray indexOfObject:currentDateString];
+    selectedHourRow = [hoursArray indexOfObject:currentHourString];
+    selectedSecondRow = [minutesArray indexOfObject:currentMinutesString];
+    selectedAMPMRow = [amPmArray indexOfObject:currentTimeAMPMString];
+
+    
+    // PickerView - Default Selection as per current Date
+    
+    [self.customPicker selectRow:selectedYearRow inComponent:0 animated:YES];
+    
+    [self.customPicker selectRow:selectedMonthRow inComponent:1 animated:YES];
+    
+    [self.customPicker selectRow:selectedDayRow inComponent:2 animated:YES];
+    
+    [self.customPicker selectRow:selectedSecondRow inComponent:3 animated:YES];
+    
+    [self.customPicker selectRow:selectedSecondRow inComponent:4 animated:YES];
+    
+    [self.customPicker selectRow:selectedAMPMRow inComponent:5 animated:YES];
+}
+
 
 #pragma mark - UIPickerViewDelegate
 
@@ -196,12 +215,83 @@
         
         [self.customPicker reloadAllComponents];
         
+//        [self.customPicker selectRow:selectedDayRow inComponent:2 animated:YES];
+        
     }
+    else if (component == 3)
+    {
+        selectedHourRow = row;
+        
+        [self.customPicker reloadAllComponents];
+//        [self.customPicker selectRow:selectedHourRow inComponent:3 animated:YES];
+        
+    }
+    else if (component == 4)
+    {
+        selectedSecondRow = row;
+        
+        [self.customPicker reloadAllComponents];
+//        [self.customPicker selectRow:selectedSecondRow inComponent:4 animated:YES];
+        
+    }
+    else if (component == 5)
+    {
+        selectedAMPMRow = row;
+        
+        [self.customPicker reloadAllComponents];
+//        [self.customPicker selectRow:selectedAMPMRow inComponent:5 animated:YES];
+        
+    }
+    
+//    [self.customPicker selectRow:selectedYearRow inComponent:0 animated:YES];
+//    
+//    [self.customPicker selectRow:selectedMonthRow inComponent:1 animated:YES];
+//    
+//    [self.customPicker selectRow:selectedDayRow inComponent:2 animated:YES];
+//    
+//    [self.customPicker selectRow:selectedHourRow inComponent:3 animated:YES];
+//    
+//    [self.customPicker selectRow:selectedSecondRow inComponent:4 animated:YES];
+//    
+//    [self.customPicker selectRow:selectedAMPMRow inComponent:5 animated:YES];
     
 }
 
 
 #pragma mark - UIPickerViewDatasource
+
+//-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+//{
+//    NSString *str = @"";
+//    
+//    if (component == 0)
+//    {
+//        str =  [yearArray objectAtIndex:row]; // Year
+//    }
+//    else if (component == 1)
+//    {
+//        str =  [monthArray objectAtIndex:row];  // Month
+//    }
+//    else if (component == 2)
+//    {
+//        str =  [DaysArray objectAtIndex:row]; // Date
+//        
+//    }
+//    else if (component == 3)
+//    {
+//        str =  [hoursArray objectAtIndex:row]; // Hours
+//    }
+//    else if (component == 4)
+//    {
+//        str =  [minutesArray objectAtIndex:row]; // Mins
+//    }
+//    else
+//    {
+//        str =  [amPmArray objectAtIndex:row]; // AM/PM
+//    }
+//    
+//    return str;
+//}
 
 - (UIView *)pickerView:(UIPickerView *)pickerView
             viewForRow:(NSInteger)row
@@ -213,13 +303,12 @@
     UILabel *pickerLabel = (UILabel *)view;
     
     if (pickerLabel == nil) {
-        CGRect frame = CGRectMake(0.0, 0.0, 50, 60);
+        CGRect frame = CGRectMake(0.0, 0.0, 50, 30);
         pickerLabel = [[UILabel alloc] initWithFrame:frame];
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
         [pickerLabel setFont:[UIFont systemFontOfSize:15.0f]];
     }
-    
     
     
     if (component == 0)
@@ -248,8 +337,21 @@
         pickerLabel.text =  [amPmArray objectAtIndex:row]; // AM/PM
     }
     
+//    pickerLabel.backgroundColor = [UIColor lightGrayColor];
+    
+    
     return pickerLabel;
     
+}
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 45.0f;
+}
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+    return 50.0;
 }
 
 
@@ -447,6 +549,8 @@
     [view addSubview:sdPicker];
     
     
+    
+    
     [UIView animateWithDuration:0.3f
                           delay:0
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -459,7 +563,8 @@
                          
                      }
                      completion:^(BOOL finished){
-                         
+                         [sdPicker->_customPicker reloadAllComponents];
+                         [sdPicker selectNowDate];
                      }];
 }
 
