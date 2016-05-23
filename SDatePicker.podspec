@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "SDatePicker"
   s.version      = "1.0.0"
-  s.summary      = "一个很使用的日期选择封装"
+  s.summary      = "一个很实用的日期选择封装"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
