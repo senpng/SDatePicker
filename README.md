@@ -3,15 +3,15 @@
 
 日期时间Picker。
 
-+(void)showInView:(UIView*)view Done:(Done)done Cancel:(Cancel)cancel;
+public class func showInView(view: UIView, _ done: (date: NSDate) -> (), _ cancel: () -> ());
 
 Example：
 
-	[SDatePicker showInView:keyWindow Done:^(NSDate *date){
-
-	} Cancel:^(){
-
-	}];
+	SDatePicker.showInView(self.view, { (date) in
+            print(date);
+            }) { 
+            print("cancel");
+        };
 
 图片：
 	 ![image](https://github.com/SenPng/SDatePicker/raw/master/Example.jpg)
