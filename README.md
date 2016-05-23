@@ -6,7 +6,7 @@
 
 日期时间Picker。
 
-public class func showInView(view: UIView, _ done: (date: NSDate) -> (), _ cancel: () -> ());
+    public class func showInView(view: UIView, _ done: (date: NSDate) -> (), _ cancel: () -> ());
 
 Example：
 
