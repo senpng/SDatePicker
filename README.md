@@ -1,5 +1,8 @@
 # SDatePicker
 
+可以使用CocoaPods安装
+
+    pod "SDatePicker"
 
 日期时间Picker。
 
